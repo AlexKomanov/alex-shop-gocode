@@ -7,12 +7,12 @@ import {
   makeStyles,
   Grid,
   CardHeader,
-  Tooltip,
+  Tooltip, Button,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { useContext, useState } from "react";
-import { CartCtx } from "../../Context/CartContext";
+import { CartContext } from "../../Context/CartContextWrapper";
 import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Product = ({ title, image, price, id }) => {
-  const [list, setList] = useContext(CartCtx);
+  const [list, setList] = useContext(CartContext);
   const [isAdd, setIsAdd] = useState(true);
 
   const classes = useStyles();
@@ -61,18 +61,20 @@ const Product = ({ title, image, price, id }) => {
           action={
             isAdd ? (
               <Tooltip title="Add">
-                <AddShoppingCartIcon
+                <Button
+                  variant="contained"
                   color="primary"
-                  onClick={() => listHandler({ id, title, image, price })}
-                />
+                  onClick={() => listHandler({ id, title, image, price })}>
+                  Add Item
+                </Button>
               </Tooltip>
             ) : (
-              <Tooltip title="Remove">
-                <RemoveShoppingCartIcon
-                  color="primary"
-                  onClick={() => listHandler({ id, title, image, price })}
-                />
-              </Tooltip>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => listHandler({ id, title, image, price })}>
+                  Remove
+                </Button>
             )
           }
           title={title}

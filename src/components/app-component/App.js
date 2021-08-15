@@ -3,7 +3,7 @@ import Header from "../header-component/Header";
 import Products from "../products-component/Products";
 import { useState, useEffect } from "react";
 import Spinner from "../spinnet-component/Spinner";
-import { CartContext } from "../../Context/CartContext";
+import { CartContextWrapper } from "../../Context/CartContextWrapper";
 import { Container } from "@material-ui/core";
 
 function App() {
@@ -53,12 +53,12 @@ function App() {
   }, [products]);
 
   return (
-    <CartContext>
+    <CartContextWrapper>
       <Container fixed>
         <Header categories={categories} handlerFilter={handlerFilter} />
         {spinner ? <Spinner /> : <Products products={filterProducts} />}
       </Container>
-    </CartContext>
+    </CartContextWrapper>
   );
 }
 
